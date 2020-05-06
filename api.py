@@ -29,14 +29,14 @@ temp = data['current']['temperature']
 print('Time : ',time)
 print('Temprature : ',temp)
 
-def ExcelWriter(self):
-    pass df = pd.DataFrame({'ILCEKOD':[1,3,5,7,4,5,6,4,7,8,9],'TIME':time,'TEMPRATURE':temp})
+def ExeceleYaz():
+    df = pd.DataFrame({'ILCEKOD':[1,3,5,7,4,5,6,4,7,8,9],'TIME':time,'TEMPRATURE':temp})
     writer = ExcelWriter('New_Excel.xlsx')
     df.to_excel(writer,'Sheet1',index=False)
     writer.save()
 
 
-schedule.every(10).seconds.do(ExcelWriter) #excele schedule ile yazma
+schedule.every(10).seconds.do(ExeceleYaz) #excele schedule ile yazma
 while True:
     schedule.run_pending()
     #time.sleep(10)
