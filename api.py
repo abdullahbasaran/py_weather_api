@@ -2,6 +2,11 @@ import requests
 import pprint
 import pandas as pd
 from unidecode import unidecode
+import schedule
+import time
+from pandas import ExcelWriter
+from pandas import ExcelFile
+import numpy as np
 
 
 excel_data_df = pd.read_excel('ilce_merkez_coord.xlsx') #excel den dataframe e donusturme
@@ -18,17 +23,25 @@ url = 'https://api.weatherstack.com/current?access_key=51d7bfab86b02431a6a6cc5d4
 res = requests.get(url)
 data = res.json()
 
-time = data['location']['localtime']
-
+time = data['location']['localtime'] #istenilen degerin cekilmesi
+temp = data['current']['temperature']
 
 print('Time : ',time)
+print('Temprature : ',temp)
+
+def ExcelWriter(self):
+    pass df = pd.DataFrame({'ILCEKOD':[1,3,5,7,4,5,6,4,7,8,9],'TIME':time,'TEMPRATURE':temp})
+    writer = ExcelWriter('New_Excel.xlsx')
+    df.to_excel(writer,'Sheet1',index=False)
+    writer.save()
+
+
+schedule.every(10).seconds.do(ExcelWriter) #excele schedule ile yazma
+while True:
+    schedule.run_pending()
+    #time.sleep(10)
+
+
 #print(data)
 
 
-'''temp = data['main']['temp']
-wind_speed = data['wind']['speed']
-
-print('Temperature : ',temp)
-print('Wind Speed : ',wind_speed)
-
-'''
