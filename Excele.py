@@ -31,7 +31,7 @@ print('Temprature : ',temp)
 
 def ExeceleYaz():
     df = pd.DataFrame({'ILCEKOD':[1,3,5,7,4,5,6,4,7,8,9],'TIME':time,'TEMPRATURE':temp})
-    writer = ExcelWriter('New_Excel.xlsx')
+    writer = ExcelWriter('aaNew_Excel.xlsx')
     df.to_excel(writer,'Sheet1',index=False)
     writer.save()
 
